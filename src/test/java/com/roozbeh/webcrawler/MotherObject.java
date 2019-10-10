@@ -40,6 +40,10 @@ public class MotherObject {
         return 1;
     }
 
+    public static int anyInvalidId() {
+        return 10;
+    }
+
     public static Product anyValidPersistenceProduct() {
         Product product = new Product();
         product.setDescription(DUMMY);
@@ -47,6 +51,12 @@ public class MotherObject {
         product.setExtraInfo(anyValidExtraInfo());
         product.setPrice(DUMMY);
         product.setName(DUMMY);
+        return product;
+    }
+
+    public static Product anyNonePersistenceProduct(){
+        Product product = anyValidPersistenceProduct();
+        product.setId(null);
         return product;
     }
 

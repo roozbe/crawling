@@ -22,8 +22,8 @@ public class ProductService {
                 .orElse(productRepository.save(productMapper.productModelToProduct(productModel)));
     }
 
-    public Product save(ProductModel productModel) {
-        return productRepository.save(productMapper.productModelToProduct(productModel));
+    void save(ProductModel productModel) {
+        productRepository.save(productMapper.productModelToProduct(productModel));
     }
 
     public Product findProductById(String id) {

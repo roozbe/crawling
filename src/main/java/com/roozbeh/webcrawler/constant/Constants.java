@@ -7,7 +7,6 @@ public class Constants {
     private Constants() {
     }
 
-    public static final String MAIN_URL = "http://magento-test.finology.com.my/";
     public static final String A_TAG = "a";
     public static final String HREF_ATTRIBUTE = "href";
     public static final String LEVEL_TOP_CLASS_NAME = ".level-top";

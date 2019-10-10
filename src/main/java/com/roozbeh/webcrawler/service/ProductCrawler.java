@@ -4,6 +4,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -20,8 +21,11 @@ import static com.roozbeh.webcrawler.constant.Constants.*;
 @Component
 public class ProductCrawler {
 
+    @Value("${crawler.url}")
+    private String mainUrl;
+
     List<String> fetchTopLevelUrls() throws IOException {
-        Document doc = Jsoup.connect(MAIN_URL).get();
+        Document doc = Jsoup.connect(mainUrl).get();
         Elements topLevelHeadLines = doc.getElementsByTag(A_TAG).select(LEVEL_TOP_CLASS_NAME);
         return getAbsUrlsFromElements(topLevelHeadLines);
     }

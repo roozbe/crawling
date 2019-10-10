@@ -1,7 +1,9 @@
 package com.roozbeh.webcrawler.dal.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Map;
@@ -12,6 +14,8 @@ import java.util.Map;
 @Entity
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 @Table(name = "product")
 @SequenceGenerator(name = "sq_product", sequenceName = "sq_product", allocationSize = 1)
 public class Product {

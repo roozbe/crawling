@@ -3,6 +3,7 @@ package com.roozbeh.webcrawler.controller;
 import com.roozbeh.webcrawler.model.ProductModel;
 import com.roozbeh.webcrawler.service.Aggregator;
 import com.roozbeh.webcrawler.service.ProductService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ class ProductControllerTest {
     private Aggregator aggregator;
 
     @Test
+    @DisplayName("given saveProduct when POST any valid ProductModel then persist the product and return with id")
     void saveProduct() throws Exception {
         doReturn(anyValidPersistenceProduct()).when(productService).findOrSave(any(ProductModel.class));
 
@@ -45,6 +47,7 @@ class ProductControllerTest {
     }
 
     @Test
+    @DisplayName("given fetchProductDetailsByItsUrl when POST the product ulr then fetch and return the detail of the product")
     void fetchProductDetailsByItsUrl() throws Exception {
         doReturn(anyValidProductModel()).when(aggregator).fetchProductDetailsByItsUrl(anyString());
 
@@ -56,15 +59,17 @@ class ProductControllerTest {
     }
 
     @Test
+    @DisplayName("given fetchProductById when GET with valid Id then return the product")
     void fetchProductById() throws Exception {
         doReturn(anyValidPersistenceProduct()).when(productService).findProductById(anyString());
 
-        mockMvc.perform(get("/products/1"))
+        mockMvc.perform(get("/products/" + anyValidId()))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("name", equalTo(DUMMY)));
     }
 
     @Test
+    @DisplayName("given findAllProductUrls when GET urls then return all the product urls")
     void findAllProductUrls() throws Exception {
         doReturn(anyValidUrlList()).when(aggregator).findAllProductUrls();
 
