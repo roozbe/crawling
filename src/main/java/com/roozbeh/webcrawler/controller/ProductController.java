@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * @author rezaeian
  */
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/")
 @AllArgsConstructor
 @Slf4j
 public class ProductController {
@@ -28,26 +28,26 @@ public class ProductController {
     private ProductService productService;
     private Aggregator aggregator;
 
-    @PostMapping("/")
+    @PostMapping("products")
     @ApiOperation(value = "Persist Product in to DB")
     public ResponseEntity<Product> saveProduct(@RequestBody ProductModel product) {
         Product saved = productService.findOrSave(product);
         return new ResponseEntity<>(saved, HttpStatus.OK);
     }
 
-    @PostMapping("/url")
+    @PostMapping("urls")
     @ApiOperation(value = "Fetch Product Detail by Its Url")
     public ProductModel fetchProductDetailsByItsUrl(@RequestBody UrlModel urlModel) throws IOException {
         return aggregator.fetchProductDetailsByItsUrl(urlModel.getUrl());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("products/{id}")
     @ApiOperation(value = "Fetch Product Detail by given Id")
     public Product fetchProductById(@PathVariable String id){
         return productService.findProductById(id);
     }
 
-    @GetMapping("/url")
+    @GetMapping("urls")
     @ApiOperation(value = "Fetch All Product Urls")
     public List<UrlModel> findAllProductUrls() throws IOException {
         return aggregator.findAllProductUrls().stream().map(url -> new UrlModel(url)).collect(Collectors.toList());

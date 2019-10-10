@@ -12,8 +12,8 @@ import java.util.Map;
  */
 @Getter
 @Setter
-@ToString
 @Builder
+@ToString
 public class ProductModel {
 
     private String name;
