@@ -38,7 +38,7 @@ public class Aggregator {
         return productUrls;
     }
 
-    public ProductModel fetchProductDetails(String productUrl) throws IOException {
+    public ProductModel fetchProductDetailsByItsUrl(String productUrl) throws IOException {
         Elements elements = productCrawler.fetchElementsOfProduct(productUrl);
         return ProductModel.builder()
                 .name(productCrawler.fetchNameOfProduct(elements))
@@ -56,7 +56,7 @@ public class Aggregator {
         BloomFilter<String> bloomFilter = BloomFilter.create(Funnels.stringFunnel(Charset.defaultCharset()), EXPECTED_INSERTIONS, FPP);
         for (String url : allProductUrls) {
             log.info("Product URL : {}", url);
-            ProductModel productModel = fetchProductDetails(url);
+            ProductModel productModel = fetchProductDetailsByItsUrl(url);
             log.info("Product : {}", productModel);
             if (!bloomFilter.mightContain(productModel.getName())) {
                 log.info("Product does not exist");

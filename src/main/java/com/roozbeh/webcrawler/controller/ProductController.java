@@ -38,7 +38,7 @@ public class ProductController {
     @PostMapping("/url")
     @ApiOperation(value = "Fetch Product Detail by Its Url")
     public ProductModel fetchProductDetailsByItsUrl(@RequestBody UrlModel urlModel) throws IOException {
-        return aggregator.fetchProductDetails(urlModel.getUrl());
+        return aggregator.fetchProductDetailsByItsUrl(urlModel.getUrl());
     }
 
     @GetMapping("/{id}")
