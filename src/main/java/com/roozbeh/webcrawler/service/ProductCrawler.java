@@ -1,5 +1,6 @@
 package com.roozbeh.webcrawler.service;
 
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -25,7 +26,7 @@ public class ProductCrawler {
     private String mainUrl;
 
     List<String> fetchTopLevelUrls() throws IOException {
-        Document doc = Jsoup.connect(mainUrl).get();
+        Document doc = getDocumentFromUrl(mainUrl);
         Elements topLevelHeadLines = doc.getElementsByTag(A_TAG).select(LEVEL_TOP_CLASS_NAME);
         return getAbsUrlsFromElements(topLevelHeadLines);
     }
@@ -40,7 +41,7 @@ public class ProductCrawler {
 
     private List<String> fetchFirstPageMidLevelUrls(String url) throws IOException {
         List<String> midLevelUrls = new ArrayList<>();
-        Document doc = Jsoup.connect(url).get();
+        Document doc = getDocumentFromUrl(url);
         Elements firstPageUrlElements = doc.select(ITEM_CLASS_NAME);
         for (Element headline : firstPageUrlElements) {
             String firstPageUrl = headline.childNode(0).absUrl(HREF_ATTRIBUTE);
@@ -51,7 +52,7 @@ public class ProductCrawler {
     }
 
     private List<String> fetchPagingMidLevelUrls(String firstPageUrl) throws IOException {
-        Document doc = Jsoup.connect(firstPageUrl).get();
+        Document doc = getDocumentFromUrl(firstPageUrl);
         List<String> midLevelPagesUrls = new ArrayList<>();
         if (doc.select(DIV_PAGES_CLASS).size() > 0) {
             Elements pageUrlElements = doc.select(DIV_PAGES_CLASS).get(0).getElementsByTag(A_TAG).select(PAGE_CLASS_NAME);
@@ -61,7 +62,7 @@ public class ProductCrawler {
     }
 
     List<String> fetchPageProductUrls(String pageUrl) throws IOException {
-        Document doc = Jsoup.connect(pageUrl).get();
+        Document doc = getDocumentFromUrl(pageUrl);
         Elements productUrlElements = doc.select(A_PRODUCT_CLASS);
         return getAbsUrlsFromElements(productUrlElements);
     }
@@ -71,7 +72,7 @@ public class ProductCrawler {
     }
 
     Elements fetchElementsOfProduct(String productUrl) throws IOException {
-        Document doc = Jsoup.connect(productUrl).get();
+        Document doc = getDocumentFromUrl(productUrl);
         return doc.select(DIV_COLUMN_MAIN_CLASS);
     }
 
@@ -98,5 +99,9 @@ public class ProductCrawler {
                 .collect(Collectors.toMap(
                         e -> e.select(TH_TAG).html(),
                         e -> e.select(TD_TAG).html()));
+    }
+
+    Document getDocumentFromUrl(String mainUrl) throws IOException {
+        return Jsoup.connect(mainUrl).get();
     }
 }
