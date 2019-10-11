@@ -36,7 +36,7 @@ class ProductControllerTest {
 
     @Test
     @DisplayName("given saveProduct when POST any valid ProductModel then persist the product and return with id")
-    void saveProduct() throws Exception {
+    void given_saveProduct_when_POST_any_valid_ProductModel_then_persist_the_product_and_return_with_id() throws Exception {
         doReturn(anyValidPersistenceProduct()).when(productService).findOrSave(any(ProductModel.class));
 
         mockMvc.perform(post("/products")
@@ -48,7 +48,7 @@ class ProductControllerTest {
 
     @Test
     @DisplayName("given fetchProductDetailsByItsUrl when POST the product ulr then fetch and return the detail of the product")
-    void fetchProductDetailsByItsUrl() throws Exception {
+    void given_fetchProductDetailsByItsUrl_when_POST_the_product_ulr_then_fetch_and_return_the_detail_of_the_product() throws Exception {
         doReturn(anyValidProductModel()).when(aggregator).fetchProductDetailsByItsUrl(anyString());
 
         mockMvc.perform(post("/urls")
@@ -60,7 +60,7 @@ class ProductControllerTest {
 
     @Test
     @DisplayName("given fetchProductById when GET with valid Id then return the product")
-    void fetchProductById() throws Exception {
+    void given_fetchProductById_when_GET_with_valid_Id_then_return_the_product() throws Exception {
         doReturn(anyValidPersistenceProduct()).when(productService).findProductById(anyString());
 
         mockMvc.perform(get("/products/" + anyValidId()))
@@ -70,7 +70,7 @@ class ProductControllerTest {
 
     @Test
     @DisplayName("given findAllProductUrls when GET urls then return all the product urls")
-    void findAllProductUrls() throws Exception {
+    void given_findAllProductUrls_when_GET_urls_then_return_all_the_product_urls() throws Exception {
         doReturn(anyValidUrlList()).when(aggregator).findAllProductUrls();
 
         mockMvc.perform(get("/urls"))

@@ -55,7 +55,7 @@ class ProductServiceTest {
 
     @Test
     @DisplayName("given save when ProductModel is valid then persist the product")
-    void save() {
+    void given_save_when_ProductModel_is_valid_then_persist_the_product() {
         doReturn(anyNonePersistenceProduct()).when(productMapper).productModelToProduct(any(ProductModel.class));
 
         productService.save(anyValidProductModel());
