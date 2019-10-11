@@ -36,7 +36,9 @@ class ProductServiceTest {
     void given_findOrSave_when_the_product_exist_then_return_the_product() {
         doReturn(Optional.of(anyValidPersistenceProduct())).when(productRepository).findByName(anyString());
 
-        assertEquals(anyValidPersistenceProduct(), productService.findOrSave(anyValidProductModel()));
+        Product product = productService.findOrSave(anyValidProductModel());
+
+        assertEquals(anyValidPersistenceProduct(), product);
     }
 
     @Test
@@ -46,7 +48,9 @@ class ProductServiceTest {
         doReturn(anyValidPersistenceProduct()).when(productRepository).save(any(Product.class));
         doReturn(anyNonePersistenceProduct()).when(productMapper).productModelToProduct(any(ProductModel.class));
 
-        assertEquals(anyValidPersistenceProduct(), productService.findOrSave(anyValidProductModel()));
+        Product product = productService.findOrSave(anyValidProductModel());
+
+        assertEquals(anyValidPersistenceProduct(), product);
     }
 
     @Test
@@ -64,7 +68,9 @@ class ProductServiceTest {
     void given_findProductById_when_Id_is_valid_then_return_the_related_product() {
         doReturn(Optional.of(anyValidPersistenceProduct())).when(productRepository).findById(anyLong());
 
-        assertEquals(anyValidPersistenceProduct(), productService.findProductById(String.valueOf(anyValidId())));
+        Product productById = productService.findProductById(String.valueOf(anyValidId()));
+
+        assertEquals(anyValidPersistenceProduct(), productById);
     }
 
     @Test
@@ -72,6 +78,8 @@ class ProductServiceTest {
     void given_findProductById_when_Id_is_not_valid_then_return_null() {
         doReturn(Optional.empty()).when(productRepository).findById(anyLong());
 
-        assertEquals(null, productService.findProductById(String.valueOf(anyInvalidId())));
+        Product productById = productService.findProductById(String.valueOf(anyInvalidId()));
+
+        assertNull(productById);
     }
 }
