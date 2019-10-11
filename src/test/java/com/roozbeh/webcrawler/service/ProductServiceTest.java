@@ -35,6 +35,7 @@ class ProductServiceTest {
     @DisplayName("given findOrSave when the product exist then return the product")
     void given_findOrSave_when_the_product_exist_then_return_the_product() {
         doReturn(Optional.of(anyValidPersistenceProduct())).when(productRepository).findByName(anyString());
+
         assertEquals(anyValidPersistenceProduct(), productService.findOrSave(anyValidProductModel()));
     }
 
@@ -44,6 +45,7 @@ class ProductServiceTest {
         doReturn(Optional.empty()).when(productRepository).findByName(anyString());
         doReturn(anyValidPersistenceProduct()).when(productRepository).save(any(Product.class));
         doReturn(anyNonePersistenceProduct()).when(productMapper).productModelToProduct(any(ProductModel.class));
+
         assertEquals(anyValidPersistenceProduct(), productService.findOrSave(anyValidProductModel()));
     }
 
@@ -51,7 +53,9 @@ class ProductServiceTest {
     @DisplayName("given save when ProductModel is valid then persist the product")
     void save() {
         doReturn(anyNonePersistenceProduct()).when(productMapper).productModelToProduct(any(ProductModel.class));
+
         productService.save(anyValidProductModel());
+
         verify(productRepository, atLeastOnce()).save(any(Product.class));
     }
 
@@ -59,6 +63,7 @@ class ProductServiceTest {
     @DisplayName("given findProductById when Id is valid then return the related product")
     void given_findProductById_when_Id_is_valid_then_return_the_related_product() {
         doReturn(Optional.of(anyValidPersistenceProduct())).when(productRepository).findById(anyLong());
+
         assertEquals(anyValidPersistenceProduct(), productService.findProductById(String.valueOf(anyValidId())));
     }
 
@@ -66,6 +71,7 @@ class ProductServiceTest {
     @DisplayName("given findProductById when Id is not valid then return null")
     void given_findProductById_when_Id_is_not_valid_then_return_null() {
         doReturn(Optional.empty()).when(productRepository).findById(anyLong());
+
         assertEquals(null, productService.findProductById(String.valueOf(anyInvalidId())));
     }
 }

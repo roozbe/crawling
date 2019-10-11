@@ -55,15 +55,15 @@ public class Aggregator {
         // Checking existence of product name
         BloomFilter<String> bloomFilter = BloomFilter.create(Funnels.stringFunnel(Charset.defaultCharset()), EXPECTED_INSERTIONS, FPP);
         for (String url : allProductUrls) {
-            log.info("Product URL : {}", url);
+            log.debug("Product URL : {}", url);
             ProductModel productModel = fetchProductDetailsByItsUrl(url);
-            log.info("Product : {}", productModel);
+            log.debug("Product : {}", productModel);
             if (!bloomFilter.mightContain(productModel.getName())) {
-                log.info("Product does not exist");
+                log.debug("Product {} does not exist", productModel.getName());
                 productService.save(productModel);
                 bloomFilter.put(productModel.getName());
             } else {
-                log.info("Product exists");
+                log.debug("Product {} exists", productModel.getName());
             }
         }
     }

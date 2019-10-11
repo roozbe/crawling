@@ -31,26 +31,32 @@ class ProductCrawlerTest {
     @Test
     void fetchTopLevelUrls() throws IOException {
         doReturn(anyMainDocument()).when(productCrawler).getDocumentFromUrl(anyString());
+
         List<String> topLevelUrls = productCrawler.fetchTopLevelUrls();
+
         assertNotEquals(0, topLevelUrls.size());
     }
 
     @Test
     void fetchAllMidLevelUrls() throws IOException {
         doReturn(anyMidLevelDocument(), anyPageDocument()).when(productCrawler).getDocumentFromUrl(anyString());
+
         List<String> topLevelUrls = productCrawler.fetchAllMidLevelUrls(anyMidLevelUrlList());
+
         assertNotEquals(0, topLevelUrls.size());
     }
 
     @Test
     void fetchPageProductUrls() throws IOException {
         doReturn(anyPageDocument()).when(productCrawler).getDocumentFromUrl(anyString());
+
         assertNotNull(productCrawler.fetchPageProductUrls(anyValidUrl()));
     }
 
     @Test
     void fetchElementsOfProduct() throws IOException {
         doReturn(anyProductDocument()).when(productCrawler).getDocumentFromUrl(anyString());
+
         assertNotNull(productCrawler.fetchElementsOfProduct(anyValidUrl()));
     }
 
