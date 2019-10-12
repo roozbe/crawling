@@ -5,13 +5,13 @@ Web crawler for collecting product details from [http://magento-test.finology.co
 
 ## Installation
 
-Use the package manager **maven** to install foobar.
+Use the package manager **maven** to install project.
 
 ```bash
 mvn clean package
 mvn spring-boot:run
 ```
-After running the project, it will initially start to collecting all products detail. 
+After running the project, it will initially start to collecting all products detail. The project uses BloomFilter for don't list the same product more than one.
 ## Swagger
 Swagger Url : ```http://localhost:9585/swagger-ui.html```
 
