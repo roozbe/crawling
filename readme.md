@@ -11,7 +11,7 @@ Use the package manager **maven** to install project.
 mvn clean package
 mvn spring-boot:run
 ```
-After running the project, it will initially start to collecting all products detail. The project uses BloomFilter for don't list the same product more than one.
+After running the project, it will initially start to collecting all products detail. The project uses BloomFilter to prevent listing the same product more than once.
 ## Swagger
 Swagger Url : ```http://localhost:9585/swagger-ui.html```
 
