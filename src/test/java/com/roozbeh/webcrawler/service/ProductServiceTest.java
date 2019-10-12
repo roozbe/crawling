@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
@@ -32,23 +31,23 @@ class ProductServiceTest {
 
 
     @Test
-    @DisplayName("given findOrSave when the product exist then return the product")
+    @DisplayName("given persist when the product exist then return the product")
     void given_findOrSave_when_the_product_exist_then_return_the_product() {
         doReturn(Optional.of(anyValidPersistenceProduct())).when(productRepository).findByName(anyString());
 
-        Product product = productService.findOrSave(anyValidProductModel());
+        Product product = productService.persist(anyValidProductModel());
 
         assertEquals(anyValidPersistenceProduct(), product);
     }
 
     @Test
-    @DisplayName("given findOrSave when the product does not exist then persists and returns the product")
+    @DisplayName("given persist when the product does not exist then persists and returns the product")
     void given_findOrSave_when_the_product_does_not_exist_then_persists_and_returns_the_product() {
         doReturn(Optional.empty()).when(productRepository).findByName(anyString());
         doReturn(anyValidPersistenceProduct()).when(productRepository).save(any(Product.class));
         doReturn(anyNonePersistenceProduct()).when(productMapper).productModelToProduct(any(ProductModel.class));
 
-        Product product = productService.findOrSave(anyValidProductModel());
+        Product product = productService.persist(anyValidProductModel());
 
         assertEquals(anyValidPersistenceProduct(), product);
     }

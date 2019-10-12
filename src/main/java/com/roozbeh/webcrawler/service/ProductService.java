@@ -17,7 +17,7 @@ public class ProductService {
     private ProductRepository productRepository;
     private ProductMapper productMapper;
 
-    public Product findOrSave(ProductModel productModel) {
+    public Product persist(ProductModel productModel) {
         return productRepository.findByName(productModel.getName())
                 .orElse(productRepository.save(productMapper.productModelToProduct(productModel)));
     }

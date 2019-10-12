@@ -37,7 +37,7 @@ class ProductControllerTest {
     @Test
     @DisplayName("given saveProduct when POST any valid ProductModel then persist the product and return with id")
     void given_saveProduct_when_POST_any_valid_ProductModel_then_persist_the_product_and_return_with_id() throws Exception {
-        doReturn(anyValidPersistenceProduct()).when(productService).findOrSave(any(ProductModel.class));
+        doReturn(anyValidPersistenceProduct()).when(productService).persist(any(ProductModel.class));
 
         mockMvc.perform(post("/products")
                 .contentType(MediaType.APPLICATION_JSON)

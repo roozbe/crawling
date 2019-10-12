@@ -1,18 +1,17 @@
 package com.roozbeh.webcrawler.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Map;
 
 /**
  * @author rezaeian
  */
+@Builder(toBuilder = true)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@Setter(value = AccessLevel.PACKAGE)
 @Getter
-@Setter
-@Builder
 @ToString
 public class ProductModel {
 

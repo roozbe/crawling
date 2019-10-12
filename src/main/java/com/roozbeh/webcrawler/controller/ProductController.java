@@ -31,7 +31,7 @@ public class ProductController {
     @PostMapping("products")
     @ApiOperation(value = "Persist Product in to DB")
     public ResponseEntity<Product> saveProduct(@RequestBody ProductModel product) {
-        Product saved = productService.findOrSave(product);
+        Product saved = productService.persist(product);
         return new ResponseEntity<>(saved, HttpStatus.OK);
     }
 
