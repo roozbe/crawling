@@ -1,4 +1,4 @@
-# Sample web crawler project for finology job interview
+# Sample web crawler project
 
 Web crawler for collecting product details from [http://magento-test.finology.com.my/](http://magento-test.finology.com.my/)
 
